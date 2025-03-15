@@ -7,6 +7,7 @@ const connectDB = require("./config/db");
 const { secret } = require("./config/secret");
 const morgan = require('morgan');
 const globalErrorHandler = require("./middleware/global-error-handler");
+app.use(express.json());
 
 // Routes
 const userRoutes = require("./routes/user.routes");
@@ -25,7 +26,6 @@ app.use(cors({
   origin: ["http://localhost:3000", "https://thevintagecollection.vercel.app"],
   credentials: true
 }));
-app.use(express.json());
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -60,5 +60,4 @@ app.use((req, res, next) => {
   next();
 });
 
-// ❌ Remove app.listen() (Vercel does not need it)
 module.exports = app;
