@@ -21,7 +21,10 @@ const adminRoutes = require("./routes/admin.routes");
 const cloudinaryRoutes = require("./routes/cloudinary.routes");
 
 // Middleware
-app.use(cors({ origin: "*", credentials: true, methods: "GET,POST,PUT,DELETE" }));
+app.use(cors({
+  origin: ["http://localhost:3000", "https://thevintagecollection.vercel.app"],
+  credentials: true
+}));
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
