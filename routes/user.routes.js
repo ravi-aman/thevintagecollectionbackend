@@ -4,7 +4,7 @@ const userController= require('../controller/user.controller');
 
 
 // add a user
-router.post("/signup", userController.signup);
+router.get("/signup", userController.signup);
 // login
 router.post("/login", userController.login);
 // forget-password
