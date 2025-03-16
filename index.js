@@ -49,7 +49,7 @@ app.use("/api/admin", adminRoutes);
 // Root Route
 app.get("/", (req, res) => res.send("Apps worked successfully"));
 
-app.listen(PORT, () => console.log(`server running on port ${PORT}`));
+// app.listen(PORT, () => console.log(`server running on port ${PORT}`));
 
 // Global Error Handler
 app.use(globalErrorHandler);
