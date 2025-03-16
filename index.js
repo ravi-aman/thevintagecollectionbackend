@@ -8,6 +8,7 @@ const { secret } = require("./config/secret");
 const morgan = require('morgan');
 const globalErrorHandler = require("./middleware/global-error-handler");
 app.use(express.json());
+const PORT = secret.port || 7000;
 
 // Routes
 const userRoutes = require("./routes/user.routes");
@@ -22,6 +23,7 @@ const adminRoutes = require("./routes/admin.routes");
 const cloudinaryRoutes = require("./routes/cloudinary.routes");
 
 // Middleware
+
 app.use(cors({
   origin: ["http://localhost:3000", "https://thevintagecollection.vercel.app"],
   credentials: true
@@ -46,6 +48,8 @@ app.use("/api/admin", adminRoutes);
 
 // Root Route
 app.get("/", (req, res) => res.send("Apps worked successfully"));
+
+app.listen(PORT, () => console.log(`server running on port ${PORT}`));
 
 // Global Error Handler
 app.use(globalErrorHandler);

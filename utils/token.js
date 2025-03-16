@@ -1,31 +1,26 @@
 const jwt = require("jsonwebtoken");
 const { secret } = require("../config/secret");
 
+// Function to generate authentication token
 exports.generateToken = (userInfo) => {
   const payload = {
     _id: userInfo._id,
     name: userInfo.name,
     email: userInfo.email,
     role: userInfo.role,
+    iat: Math.floor(Date.now() / 1000), // Added issued-at timestamp for debugging
   };
 
-  const token = jwt.sign(payload,secret.token_secret, {
-    expiresIn: "2d",
-  });
-
-  return token;
+  return jwt.sign(payload, secret.token_secret, { expiresIn: "2d" });
 };
 
-// tokenForVerify
+// Function to generate verification token (for email verification)
 exports.tokenForVerify = (user) => {
-  return jwt.sign(
-    {
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      password: user.password,
-    },
-    secret.jwt_secret_for_verify,
-    { expiresIn: "10m" }
-  );
+  const payload = {
+    _id: user._id,
+    email: user.email,
+    iat: Math.floor(Date.now() / 1000), // Added issued-at timestamp
+  };
+
+  return jwt.sign(payload, secret.jwt_secret_for_verify, { expiresIn: "1h" });
 };
