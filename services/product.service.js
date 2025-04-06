@@ -189,3 +189,9 @@ exports.deleteProduct = async (id) => {
   const result = await Product.findByIdAndDelete(id)
   return result;
 };
+
+
+// Bulk delete products by array of IDs
+exports.deleteManyProductsByIds = async (ids) => {
+  return await Product.deleteMany({ _id: { $in: ids } });
+};

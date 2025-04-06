@@ -185,3 +185,30 @@ exports.deleteProduct = async (req, res,next) => {
   }
 };
 
+
+
+
+// Bulk delete products controller
+exports.deleteMultipleProducts = async (req, res, next) => {
+  try {
+    const { ids } = req.body; // Get array of product IDs from the request body
+
+    // Validate input
+    if (!Array.isArray(ids) || ids.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "No product IDs provided for deletion",
+      });
+    }
+
+    // Call service to delete
+    const result = await productServices.deleteManyProductsByIds(ids);
+
+    res.status(200).json({
+      success: true,
+      message: `${result.deletedCount} products deleted successfully`,
+    });
+  } catch (error) {
+    next(error); // Pass error to Express error handler
+  }
+};

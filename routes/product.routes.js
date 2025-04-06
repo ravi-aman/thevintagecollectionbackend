@@ -27,6 +27,10 @@ router.get("/stock-out", productController.stockOutProducts);
 router.patch("/edit-product/:id", productController.updateProduct);
 // get Products ByType
 router.get('/:type', productController.getProductsByType);
+
+// delete multiple products
+router.delete("/delete-multiple", productController.deleteMultipleProducts);
+
 // get Products ByType 
 router.delete('/:id', productController.deleteProduct);
 
